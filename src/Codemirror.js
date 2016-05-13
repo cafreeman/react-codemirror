@@ -10,6 +10,7 @@ const CodeMirror = React.createClass({
 		options: React.PropTypes.object,
 		path: React.PropTypes.string,
 		value: React.PropTypes.string,
+		placeholder: React.PropTypes.string,
 		className: React.PropTypes.any,
 		codeMirrorInstance: React.PropTypes.object,
 	},
@@ -29,7 +30,11 @@ const CodeMirror = React.createClass({
 		this.codeMirror.on('focus', this.focusChanged.bind(this, true));
 		this.codeMirror.on('blur', this.focusChanged.bind(this, false));
 		this.codeMirror.on('scroll', this.scrollChanged);
-		this.codeMirror.setValue(this.props.defaultValue || this.props.value || '');
+		if (this.props.placeholder) {
+			this.codeMirror.setValue('');
+		} else {
+			this.codeMirror.setValue(this.props.defaultValue || this.props.value || '');
+		}
 	},
 	componentWillUnmount () {
 		// is there a lighter-weight way to remove the cm instance?
@@ -79,7 +84,7 @@ const CodeMirror = React.createClass({
 		);
 		return (
 			<div className={editorClassName}>
-				<textarea ref="textarea" name={this.props.path} defaultValue={this.props.value} autoComplete="off" />
+				<textarea ref="textarea" name={this.props.path} defaultValue={this.props.value} placeholder={this.props.placeholder} autoComplete="off" />
 			</div>
 		);
 	},

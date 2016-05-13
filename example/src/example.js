@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Codemirror = require('../../src/Codemirror');
 
+require('codemirror/addon/display/placeholder');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/xml/xml');
 require('codemirror/mode/markdown/markdown');
@@ -47,7 +48,7 @@ var App = React.createClass({
 		};
 		return (
 			<div>
-				<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode} options={options} interact={this.interact}/>
+				<Codemirror ref="editor" value={this.state.code} placeholder="This is a placeholder." onChange={this.updateCode} options={options} interact={this.interact}/>
 				<div style={{ marginTop: 10 }}>
 					<select onChange={this.changeMode} value={this.state.mode}>
 						<option value="markdown">Markdown</option>
